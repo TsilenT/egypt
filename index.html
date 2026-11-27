@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="guide-version" content="2">
+<meta name="guide-version" content="3">
 <meta name="theme-color" content="#132b29">
 <meta name="description" content="An interactive field guide from Cairo to the temples of Upper Egypt.">
 <title>Along the Nile • Egypt Field Guide</title>
@@ -32,6 +32,18 @@ header{position:relative;isolation:isolate;overflow:hidden;background:radial-gra
 @media(max-width:760px){.mast{min-height:0}.grid{grid-template-areas:"itinerary" "map"}.map,.card{grid-row:auto}.cardtop a{margin-left:auto}.stamp{margin-right:3px}}
 @media(max-width:430px){.tripbar{gap:7px}.trip-actions{justify-content:space-between;width:100%}.jump select{max-width:48vw}.today{font-size:.875rem;padding-inline:9px}.tripbar>p{display:none}}
 @media print{.trip-actions,.cardtop a,.mapfoot>a,.maptip,.pinlist,.skip{display:none!important}}
+
+.day-extra{margin:1rem 0;padding:14px 16px;border:1px solid var(--border);border-radius:10px;background:#fbf4e4}
+.day-extra h3{margin-bottom:.45rem}.day-extra p{font-size:.96rem}.day-extra a,.day-photo a{font-weight:650}
+.day-extra ul{margin:.55rem 0 0;list-style:none;padding:0}.day-extra li{padding:.55rem 0;border-top:1px solid #e5d9be}
+.day-extra li:first-child{border-top:0;padding-top:.2rem}.day-extra li:last-child{padding-bottom:0}
+.pick-tag{display:inline-block;margin-bottom:.14rem;font-size:.825rem;color:var(--teal);font-weight:700}
+.plan-hours{display:flex;flex-wrap:wrap;gap:4px 12px;margin:.65rem 0 0;color:var(--muted)}
+.day-photo{margin:.9rem 0 1.05rem;border:1px solid var(--border);background:#f8efdb;border-radius:10px;overflow:hidden}
+.day-photo img{background:#e3d4b4;display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.day-photo figcaption{padding:8px 11px;color:#4c5146;font-size:.875rem;line-height:1.45}
+.day-photo small{font-size:.78rem}
+@media(max-width:440px){.day-extra{padding:12px}}
 </style>
 </head>
 <body>
@@ -46,6 +58,19 @@ header{position:relative;isolation:isolate;overflow:hidden;background:radial-gra
 <article class="card" aria-labelledby="day-title">
 <div class="cardtop"><p class="eyebrow" id="day-label"></p><a href="#route-map" data-jump="map-title">Route map</a></div><h2 id="day-title" tabindex="-1" aria-live="polite"></h2><p class="summary" id="summary"></p>
 <section class="meals" aria-labelledby="meal-title"><h3 id="meal-title">Meals</h3><div class="pills" id="pills"></div><p class="detail empty-meal" id="meal-note"></p></section>
+<figure class="day-photo" id="day-photo" hidden><img id="sight-img" loading="lazy" decoding="async" width="800" height="450" alt=""><figcaption id="sight-credit"></figcaption></figure>
+<section class="day-extra" id="food" aria-labelledby="food-title" hidden><h3 id="food-title">Where to eat</h3><p id="food-intro"></p><ul id="food-picks"></ul></section>
+<section class="day-extra" id="gem-plan" aria-labelledby="gem-title" hidden><h3 id="gem-title">Split GEM across two visits</h3>
+<p id="gem-intro"></p>
+<ul>
+<li><span class="pick-tag">Saturday · optional, on your own</span><p><strong>Grand Hall, Grand Stairs and Main Galleries.</strong> See the giant Ramses II in the hall, then take the stairs and spend most of your time upstairs. If you have two hours, pick the periods or objects you’re most curious about rather than trying to finish every room. With more time, see Khufu’s boat in case Sunday runs short.</p></li>
+<li><span class="pick-tag">Sunday · with the tour</span><p><strong>Tutankhamun first; Khufu’s boat if there’s time.</strong> Follow your guide’s route, but ask how long you’ll get in Tut’s galleries and whether the boat building fits. The first boat is 42 metres long and was found in pieces beside the pyramid you visit that morning. If you only go Sunday and have an hour, make it Tut.</p></li>
+</ul>
+<p class="plan-hours"><span>Saturday galleries 9 a.m.–9 p.m.</span><span>Sunday galleries 9 a.m.–6 p.m.</span></p>
+<p style="margin-top:.4rem">Last entry is one hour before closing. Check the boat building’s hours if going late.</p>
+<p style="margin-top:.4rem"><a href="https://tickets.gem.eg/?hl=en-US" target="_blank" rel="noopener">Official timed tickets</a> · <a href="https://gem.eg/collection/main-galleries" target="_blank" rel="noopener">Main Galleries</a> · <a href="https://gem.eg/collection/khufus-boats-museum/" target="_blank" rel="noopener">Khufu’s Boats Museum</a></p>
+<figure class="day-photo" id="boat-photo" hidden><img id="boat-img" loading="lazy" decoding="async" width="800" height="450" alt=""><figcaption id="boat-credit"></figcaption></figure>
+</section>
 <h3>Stops</h3><ul class="stops" id="stops"></ul>
 <div class="insight"><h3>Look for</h3><p id="story"></p><a id="read" target="_blank" rel="noopener"></a><div class="more-note" id="more-note" hidden><p id="more-story"></p><a id="more-read" target="_blank" rel="noopener"></a></div></div>
 <p class="practical" id="tip"></p>
@@ -57,7 +82,7 @@ header{position:relative;isolation:isolate;overflow:hidden;background:radial-gra
 <p><strong>Meals:</strong> No tour meals listed Nov 27–28. Nov 29 is breakfast and lunch, plus a welcome reception; dinner is on your own. Nov 30–Dec 8 include breakfast, lunch and dinner. Dec 9 is breakfast only.</p>
 <p><strong>Dec 2 charter:</strong> 44 lb (about 20 kg) checked, plus a small bag that fits under the seat. The itinerary says rollers won’t fit. Keep essentials with you. The packet lists free ship laundry during the first four days and included tips for the crew and Egyptologists.</p>
 </details>
-<p class="off" style="margin:15px 0 0;font-size:.94rem"><a download="egypt-field-guide.html" href="./index.html">Download for offline use</a>. Open the saved HTML file in a browser. Only the external links need internet.</p>
+<p class="off" style="margin:15px 0 0;font-size:.94rem"><a download="egypt-field-guide.html" href="./index.html">Download for offline use</a>. Open the saved HTML file in a browser. The itinerary, map and meal notes work offline. Photos and external links need internet.</p>
 <noscript><p>The interactive guide needs JavaScript. The quick reference above still works.</p></noscript>
 </main>
 <footer>Meals and stops follow the tour itinerary. Check with the guide for changes. The map isn’t to scale.</footer>
@@ -67,7 +92,7 @@ const link=(name,url)=>[name,url];
 const osm=(name,lat,lon)=>link(name,'https://www.openstreetmap.org/?mlat='+lat+'&mlon='+lon+'#map=16/'+lat+'/'+lon);
 const D=[
 ['2026-11-27','Arrival in Cairo','Cairo','Arrive in Cairo a day early. There’s no group sightseeing today.','', 'Dinner is on your own.', ['cairo'],[osm('Cairo International Airport',30.112,31.400),osm('Central Cairo',30.049,31.235)],'Abu Simbel is almost 900 km south of Cairo in a straight line. It’s the farthest south you’ll go on this trip.','Map of the Nubian monuments','https://whc.unesco.org/en/list/88/maps/','Keep your arrival instructions and tour contact handy offline. Use the tour packet, not this guide, for pickup and visa arrangements.'],
-['2026-11-28','A free day in Cairo','Cairo','Free Saturday for early arrivals. Coptic Cairo and lunch in Zamalek are both optional.','', 'Ask the hotel if your rate includes breakfast. Dinner is on your own.', ['cairo','coptic'],[osm('Hanging Church (optional)',30.0056,31.2302),osm('Abu Serga (optional)',30.0058,31.2303),link('Coptic Museum (optional)',wiki+'en/museums/the-coptic-museum/')],'The Coptic Museum’s early book of Psalms was found under a child mummy at Beni Suef. Ask whether it’s on display if you stop in.','See the Psalter',wiki+'en/collections/psalter-11','If yesterday’s flight catches up with you, do one stop and lunch. Tomorrow is a full day.'],
+['2026-11-28','A free day in Cairo','Cairo','Free Saturday. Pick Coptic Cairo and lunch in Zamalek, or get a head start at the Grand Egyptian Museum before Sunday’s group visit.','', 'Ask the hotel if your rate includes breakfast. Dinner is on your own.', ['cairo','coptic','giza'],[osm('Hanging Church (optional)',30.0056,31.2302),osm('Abu Serga (optional)',30.0058,31.2303),link('Coptic Museum (optional)',wiki+'en/museums/the-coptic-museum/'),link('Grand Egyptian Museum (optional)','https://tickets.gem.eg/?hl=en-US')],'The Coptic Museum’s early book of Psalms was found under a child mummy at Beni Suef. Ask whether it’s on display if you stop in.','See the Psalter',wiki+'en/collections/psalter-11','If you pick Coptic Cairo, the museum ticket window closes at 4 p.m. If you pick GEM, leave some energy for Giza on Sunday.'],
 ['2026-11-29','Pyramids, Sphinx & GEM','Giza','The itinerary includes the Great Pyramid interior and a visit inside the Sphinx barrier, followed by an afternoon at the Grand Egyptian Museum.','BL','Welcome reception in the evening; dinner is on your own.', ['giza'],[osm('Great Pyramid and Sphinx',29.9765,31.1325),link('Grand Egyptian Museum','https://gem.eg/en/visit/plan-your-visit')],'Between the Sphinx’s paws is the Dream Stela. Thutmose IV’s inscription says the Sphinx promised him kingship if he cleared away the sand. At GEM, look for Tutankhamun’s Anubis shrine and remember it for the West Bank visit.','See the Anubis shrine','https://gem.eg/en/collection/artefacts/anubis-on-a-chest','The pyramid interior has a narrow approach. Ask the guide about skipping it if tight spaces aren’t your thing.'],
 ['2026-11-30','Saqqara & the royal mummies','Saqqara','See Djoser’s Step Pyramid and the mastaba of Mereruka. After lunch, choose the National Museum of Egyptian Civilization or an afternoon back at the hotel.','BLD','Lunch at a local restaurant and dinner at the hotel are listed.', ['saqqara','coptic'],[osm('Djoser’s Step Pyramid',29.8713,31.2164),link('Mastaba of Mereruka',wiki+'en/monuments/tomb-of-mereruka/'),link('NMEC (optional)','https://nmec.gov.eg/mummies-hall/')],'At NMEC you can see the mummies of Seti I and Ramses II before visiting Seti’s tomb and Ramses’ temples later in the trip.','Royal Mummies Hall','https://nmec.gov.eg/mummies-hall/','In Mereruka’s mastaba, look for the relief of hunters harpooning hippos. The tour lists seeing the Step Pyramid, not going inside.'],
 ['2026-12-01','Citadel, souk & old streets','Islamic Cairo','Begin at the Citadel and the Muhammad Ali Mosque. After lunch, explore Khan el-Khalili and walk El Moez Street to the Qalawun Complex.','BLD','Lunch at a local restaurant is listed.', ['oldcairo','cairo'],[osm('Cairo Citadel',30.0299,31.2612),osm('Khan el-Khalili',30.0478,31.2624),osm('Qalawun Complex',30.0498,31.2610)],'Look for the French clock in the mosque courtyard. Later, at Luxor Temple, spot the surviving obelisk: its partner stands in Paris.','Muhammad Ali Mosque',wiki+'en/monuments/muhammad-ali-mosque','This is the main independent shopping window on the tour. For replicas, ask about material and provenance and keep the receipt.'],
@@ -80,6 +105,145 @@ const D=[
 ['2026-12-08','Karnak, then back to Cairo','Luxor → Cairo','Disembark and explore Karnak in the morning. After lunch, fly to Cairo for the final group dinner.','BLD','Final group dinner in Cairo.', ['karnak','luxor','cairo'],[link('Karnak Temple',wiki+'archaeological-sites/karnak'),osm('Luxor International Airport',25.6708,32.7066)],'You’ll walk through the Great Hypostyle Hall’s 134 columns. For a quieter detail, ask where the Egyptian–Hittite peace treaty was carved, the sequel to the Kadesh battle imagery at Abu Simbel and the Ramesseum.','Karnak epigraphic fieldwork','https://www.memphis.edu/hypostyle/project/2016epigraphic-field-work.php','The itinerary says tips for crew and Egyptologists are included. Keep essentials in your carry-on for the charter.'],
 ['2026-12-09','Departure from Cairo','Cairo','Early breakfast, then transfer to Cairo airport.','B','Early breakfast is included. No tour lunch or dinner is listed.', ['cairo'],[osm('Cairo International Airport',30.112,31.400)],'Back in Boston, the MFA’s Pyramid Age gallery has Ankhhaf’s portrait and the statue of Menkaura and his queen from Giza.','Visit MFA Gallery 113','https://www.mfa.org/gallery/masterpieces-of-egyptian-sculpture-from-the-pyramid-age','Check the airline app or boarding pass for the terminal, and confirm pickup with the tour team.']
 ];
+const kitchen={
+ corniche:['La Zisa','No ride · Nile Corniche','Italian sit-down dinner or breakfast. Il Café Bar next door serves light meals around the clock if dinner runs late.','https://www.marriott.com/en-us/hotels/caixr-the-st-regis-cairo/dining/','La Zisa St Regis Cairo'],
+ egyptian:['Bab El Nil','Nearby · Nile City Towers','Egyptian and Middle Eastern dinner with a Nile view. Go for mezze and grilled meats; it can get lively and serves shisha. About a 10–15 minute walk from the southern end of this stretch of the Corniche; ask the desk for the easiest foot route or take a short ride.','https://www.fairmont.com/en/hotels/cairo/fairmont-nile-city/dining/bab-el-nile.restaurant.html','Bab El Nil Fairmont Nile City Cairo'],
+ roam:['Abou El Sid','Worth a ride · Zamalek','Egyptian sit-down lunch or dinner. Order molokhia with chicken and a couple of starters to share. Call ahead if you want a table at a specific time.','https://menu.picatotech.com/restaurants/abou-el-sid?lang=en','Abou El Sid Zamalek Cairo'],
+ quick:['Zööba','Quick lunch · inside GEM','Egyptian street food without leaving the museum. Look for ta’ameya (fava-bean falafel) or koshari. GEM doesn’t allow outside food or drinks.','https://gem.eg/en/gem-experience/dining/zooba/','Zooba Grand Egyptian Museum Giza'],
+ island:['Zööba','Casual lunch · Zamalek','Quick ta’ameya, ful or koshari if you’d rather eat and keep moving than sit down for a long lunch. This is the original location on 26 July Street.','https://www.zoobaeats.com/find-us/egypt-cairo?lang=en','Zooba Zamalek 16 26 July Cairo']
+};
+const foodDays={
+ '2026-11-27':['Arrival dinner: stay near the Corniche if you’re tired from the flight.',['corniche','egyptian']],
+ '2026-11-28':['Breakfast is on your own unless the hotel rate covers it. Pick lunch based on where you spend the day; La Zisa and Bab El Nil are easy dinner options on the Corniche.',['corniche','quick','roam','island','egyptian']],
+ '2026-11-29':['The welcome reception isn’t dinner. Save a nearby option for afterward, or head to Zamalek if everyone still has energy.',['egyptian','corniche','roam']]
+};
+const photos={
+ "2026-11-28": [
+  "./photos/gem.webp",
+  "Colossal granite statue of Ramesses II in the Grand Egyptian Museum.",
+  "Ramses II in the Grand Hall at GEM",
+  "Slyronit",
+  "https://commons.wikimedia.org/wiki/File:Statue_of_Ramesses_II_at_the_Grand_Egyptian_Museum.jpg",
+  "CC BY-SA 4.0",
+  "https://creativecommons.org/licenses/by-sa/4.0",
+  540,
+  720
+ ],
+ "2026-11-29": [
+  "./photos/giza.webp",
+  "Panorama of the three pyramids on the Giza Plateau.",
+  "The Giza pyramids",
+  "Benjamin Inbar",
+  "https://commons.wikimedia.org/wiki/File:Giza_Pyramids_Panorama.jpg",
+  "CC BY-SA 4.0",
+  "https://creativecommons.org/licenses/by-sa/4.0",
+  840,
+  474
+ ],
+ "2026-12-02": [
+  "./photos/abu-simbel.webp",
+  "The four colossal figures of Ramesses II at the entrance to Abu Simbel’s Great Temple.",
+  "The Great Temple at Abu Simbel",
+  "Benjamin Inbar",
+  "https://commons.wikimedia.org/wiki/File:Abu_Simbel_Great_Temple.jpg",
+  "CC BY-SA 4.0",
+  "https://creativecommons.org/licenses/by-sa/4.0",
+  840,
+  474
+ ],
+ "2026-12-04": [
+  "./photos/philae.webp",
+  "The Philae temple complex on Agilkia Island, seen across the water.",
+  "Philae on Agilkia Island",
+  "Olaf Tausch",
+  "https://commons.wikimedia.org/wiki/File:Agilkia_01.jpg",
+  "CC BY 3.0",
+  "https://creativecommons.org/licenses/by/3.0",
+  840,
+  630
+ ],
+ "2026-12-05": [
+  "./photos/luxor.webp",
+  "The northern part of Luxor Temple lit up after dark.",
+  "Luxor Temple after dark",
+  "Roland Unger",
+  "https://commons.wikimedia.org/wiki/File:LuxorTempleNight.jpg",
+  "CC BY-SA 3.0",
+  "https://creativecommons.org/licenses/by-sa/3.0",
+  800,
+  530
+ ],
+ "2026-12-06": [
+  "./photos/dendera.webp",
+  "Carvings on columns inside the Temple of Hathor at Dendera.",
+  "Carved columns in the Temple of Hathor at Dendera",
+  "© Vyacheslav Argenberg",
+  "https://commons.wikimedia.org/wiki/File:Temple_of_Hathor%2C_Hieroglyphs%2C_Columns%2C_Dendera%2C_Egypt.jpg",
+  "CC BY 4.0",
+  "https://creativecommons.org/licenses/by/4.0",
+  840,
+  560
+ ],
+ "2026-12-08": [
+  "./photos/karnak.webp",
+  "Rows of carved sandstone columns inside Karnak’s Great Hypostyle Hall.",
+  "The Great Hypostyle Hall at Karnak",
+  "Tim Adams",
+  "https://commons.wikimedia.org/wiki/File:Columns_at_Hypostyle_hall_of_Karnak_Temple_in_Luxor_Egypt.jpg",
+  "CC BY 3.0",
+  "https://creativecommons.org/licenses/by/3.0",
+  479,
+  720
+ ],
+ "boat": [
+  "./photos/khufu-boat.webp",
+  "The curved prow of Khufu’s reconstructed wooden boat on display at the GEM.",
+  "Khufu’s reassembled wooden boat at GEM",
+  "Matthäus Wander",
+  "https://commons.wikimedia.org/wiki/File:GEM_Khufus_Boat_front_2025.jpg",
+  "CC0 1.0",
+  "https://creativecommons.org/publicdomain/zero/1.0/",
+  840,
+  630
+ ]
+};
+function renderExtras(date){
+ const info=foodDays[date];get('food').hidden=!info;
+ if(info){
+   get('food-intro').textContent=info[0];
+   get('food-picks').replaceChildren(...info[1].map(key=>{
+     const [name,tag,description,menu,where]=kitchen[key];
+     const li=el('li'), p=el('p'), title=el('strong','',name);
+     const details=el('a','','Menu / info'), mapLink=el('a','','Map');
+     details.href=menu;mapLink.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(where);
+     for(const a of [details,mapLink]){a.target='_blank';a.rel='noopener'}
+     p.append(title,document.createTextNode(' · '+description+' '),details,document.createTextNode(' · '),mapLink);
+     li.append(el('span','pick-tag',tag),p);
+     return li;
+   }));
+ }
+ const sat=date==='2026-11-28', sun=date==='2026-11-29';
+ get('gem-plan').hidden=!(sat||sun);
+ if(sat||sun)get('gem-intro').textContent=sat?'If you’re doing both days, get a separate timed ticket for Saturday. Give the Main Galleries your unhurried visit and save Tut for the guided Sunday stop.':'If you already did the Main Galleries Saturday, skip the repeat if the guide’s schedule allows. If Sunday is your only visit, start with the highlights below.';
+ renderPhoto('day-photo','sight-img','sight-credit',photos[date]);
+ if(sat||sun)renderPhoto('boat-photo','boat-img','boat-credit',photos.boat);
+ else renderPhoto('boat-photo','boat-img','boat-credit',null);
+}
+function renderPhoto(figureId,imageId,creditId,photo){
+ const img=get(imageId), figure=get(figureId);
+ figure.hidden=!photo||location.protocol==='file:';
+ if(!figure.hidden){
+   const [file,alt,caption,author,credit,license,terms,w,h]=photo;
+   img.onerror=()=>{figure.hidden=true};
+   img.src=file;img.alt=alt;
+   img.style.aspectRatio=w<h?'16/10':'16/9';
+   img.style.objectFit=w<h?'contain':'cover';
+   const c=get(creditId), detail=el('small'), source=el('a','',author), lic=el('a','',license);
+   source.href=credit;lic.href=terms;for(const a of [source,lic]){a.target='_blank';a.rel='noopener'}
+   detail.append(document.createTextNode(' · '),source,document.createTextNode(' / '),lic,document.createTextNode(' · resized'));
+   c.replaceChildren(document.createTextNode(caption),detail);
+ }else img.removeAttribute('src');
+}
 const notes={
  '2026-11-30':['In the offering chamber, Mereruka’s life-size statue steps out of a niche toward an offering table.','Mereruka’s tomb',wiki+'en/monuments/tomb-of-mereruka/'],
  '2026-12-02':['On the Small Temple façade, Nefertari’s statues are as tall as Ramses II’s. Queens are usually shown smaller than kings in Egyptian royal sculpture.','Abu Simbel',wiki+'en/archaeological-sites/abu-simbel'],
@@ -89,8 +253,8 @@ const notes={
  '2026-12-08':['The twelve tall columns down the middle of the Hypostyle Hall have open papyrus flowers at the top; the shorter ones have closed buds. Look for stone window grilles in the gap between the two roof levels.','How the Hypostyle Hall was built','https://www.memphis.edu/hypostyle/about-architecture/']
 };
 const M={
-route:{label:'Egypt',terrain:'M40 48 Q90 34 125 43 L151 53 204 42 235 48 270 40 344 49 364 88 348 135 369 184 372 238 389 293 390 429 30 429 30 50Z',water:'M159 428 C150 410 183 410 173 388 S147 365 174 348 S213 332 221 314 S204 294 219 282 S239 270 219 252 S203 230 201 219 S243 214 235 198 S201 183 196 170 S179 154 164 147 S151 128 144 112 S143 95 130 76 L120 49 M130 76 Q151 66 167 47 M130 76 Q127 68 103 53',labels:[[49,28,'MEDITERRANEAN'],[300,177,'RED SEA'],[55,352,'WESTERN'],[55,371,'DESERT'],[48,434,'N ↑']],routes:[['flight','M142 91 C65 171 57 300 152 403',[5]],['flight','M152 403 Q257 400 202 346',[5]],['flight','M216 243 C333 220 310 123 142 91',[11]],['sail','M202 346 Q221 337 221 314',[7]],['sail','M221 314 Q218 297 218 278 Q234 266 219 252 L213 240',[8]],['road','M213 240 Q193 225 202 213',[9]]],pins:[['cairo',142,91,'Cairo',13,-10,[0,1,4,5,11,12]],['giza',128,108,'Giza & Saqqara',-48,27,[2,3],'start',['saqqara']],['dendera',202,213,'Dendera',-14,-2,[9],'end'],['luxor',213,240,'Luxor & Karnak',17,0,[8,9,10,11],'start',['karnak','west']],['esna',218,278,'Esna',20,3,[8]],['komombo',221,314,'Kom Ombo',20,4,[7]],['aswan',202,346,'Aswan & Philae',18,4,[5,6,7],'start',['philae']],['abusimbel',152,403,'Abu Simbel',17,8,[5]]]},
-cairo:{label:'Cairo',water:'M180 457 Q197 399 186 353 T203 300 Q224 263 215 229 T220 168 Q238 118 220 77 T230 8',labels:[[35,255,'GIZA'],[273,115,'CAIRO'],[231,431,'NILE'],[48,434,'N ↑']],routes:[['road','M227 132 Q140 120 95 184',[2]],['road','M227 132 Q172 265 133 350',[3]],['road','M227 132 Q269 147 304 193',[4]],['road','M227 132 Q205 220 240 262',[1,3]]],pins:[['cairo',227,132,'Central Cairo',12,-12,[0,1,4,5,11,12]],['giza',95,184,'Giza & GEM',-12,-17,[2]],['oldcairo',304,193,'Citadel & souk',-12,23,[4],'end'],['coptic',240,262,'Old Cairo / NMEC',13,4,[1,3]],['saqqara',133,350,'Saqqara',-14,1,[3],'end']]},
+route:{label:'Egypt',terrain:'M40 48 Q90 34 125 43 L151 53 204 42 235 48 270 40 344 49 364 88 348 135 369 184 372 238 389 293 390 429 30 429 30 50Z',water:'M159 428 C150 410 183 410 173 388 S147 365 174 348 S213 332 221 314 S204 294 219 282 S239 270 219 252 S203 230 201 219 S243 214 235 198 S201 183 196 170 S179 154 164 147 S151 128 144 112 S143 95 130 76 L120 49 M130 76 Q151 66 167 47 M130 76 Q127 68 103 53',labels:[[49,28,'MEDITERRANEAN'],[300,177,'RED SEA'],[55,352,'WESTERN'],[55,371,'DESERT'],[48,434,'N ↑']],routes:[['flight','M142 91 C65 171 57 300 152 403',[5]],['flight','M152 403 Q257 400 202 346',[5]],['flight','M216 243 C333 220 310 123 142 91',[11]],['sail','M202 346 Q221 337 221 314',[7]],['sail','M221 314 Q218 297 218 278 Q234 266 219 252 L213 240',[8]],['road','M213 240 Q193 225 202 213',[9]]],pins:[['cairo',142,91,'Cairo',13,-10,[0,1,4,5,11,12]],['giza',128,108,'Giza & Saqqara',-48,27,[1,2,3],'start',['saqqara']],['dendera',202,213,'Dendera',-14,-2,[9],'end'],['luxor',213,240,'Luxor & Karnak',17,0,[8,9,10,11],'start',['karnak','west']],['esna',218,278,'Esna',20,3,[8]],['komombo',221,314,'Kom Ombo',20,4,[7]],['aswan',202,346,'Aswan & Philae',18,4,[5,6,7],'start',['philae']],['abusimbel',152,403,'Abu Simbel',17,8,[5]]]},
+cairo:{label:'Cairo',water:'M180 457 Q197 399 186 353 T203 300 Q224 263 215 229 T220 168 Q238 118 220 77 T230 8',labels:[[35,255,'GIZA'],[273,115,'CAIRO'],[231,431,'NILE'],[48,434,'N ↑']],routes:[['road','M227 132 Q140 120 95 184',[2]],['road','M227 132 Q172 265 133 350',[3]],['road','M227 132 Q269 147 304 193',[4]],['road','M227 132 Q205 220 240 262',[1,3]]],pins:[['cairo',227,132,'Central Cairo',12,-12,[0,1,4,5,11,12]],['giza',95,184,'Giza & GEM',-12,-17,[1,2]],['oldcairo',304,193,'Citadel & souk',-12,23,[4],'end'],['coptic',240,262,'Old Cairo / NMEC',13,4,[1,3]],['saqqara',133,350,'Saqqara',-14,1,[3],'end']]},
 upper:{label:'Upper Nile',water:'M139 457 Q178 417 173 382 Q156 353 190 327 Q232 306 228 276 T213 225 Q203 194 228 170 T222 123 Q195 107 197 80 T222 20',labels:[[40,175,'WEST BANK'],[271,332,'NILE'],[48,434,'N ↑']],routes:[['sail','M180 381 Q156 353 190 327 Q232 306 228 276',[7]],['sail','M228 276 Q228 247 213 225 Q203 194 228 170 T222 123',[8]],['road','M222 123 Q194 100 198 56',[9]],['road','M222 123 Q187 143 123 147',[10]],['road','M222 123 L249 91',[11]]],pins:[['dendera',198,56,'Dendera',-15,2,[9],'end'],['karnak',249,91,'Karnak',14,-2,[11]],['luxor',222,123,'Luxor',14,4,[8,9,10,11]],['west',123,147,'Valley of the Kings',-6,24,[10]],['esna',213,225,'Esna',17,5,[8]],['komombo',228,276,'Kom Ombo',17,5,[7]],['aswan',180,381,'Aswan',17,3,[5,6,7]],['philae',164,417,'Philae',15,3,[7]]]}
 };
 const get=id=>document.getElementById(id), dates=get('days'), atlas=get('atlas'), views=get('views');
@@ -158,7 +322,7 @@ function pick(index, write=true){
  get('day-label').textContent=fmt(date,{weekday:'long',month:'long',day:'numeric'})+' · '+place;
  get('day-title').textContent=title;get('summary').textContent=summary;
  get('pills').replaceChildren(...(meals?[...meals].map(c=>el('span','pill',{B:'Breakfast',L:'Lunch',D:'Dinner'}[c]+' included')):[el('span','pill self','No tour meals listed')]));
- get('meal-note').textContent=note;get('story').textContent=story;
+ get('meal-note').textContent=note;get('story').textContent=story;renderExtras(date);
  const read=get('read');read.href=url;read.textContent=label;
  const extra=notes[date];get('more-note').hidden=!extra;
  if(extra){get('more-story').textContent=extra[0];get('more-read').textContent=extra[1];get('more-read').href=extra[2]}
